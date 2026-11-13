@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing Intelligence | Monitoramento de Preços</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/cards.css" />
+  <link rel="stylesheet" href="css/table.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand__logo">PI</div>
+        <div>
+          <h1>Pricing Intelligence</h1>
+          <p>Monitoramento Inteligente</p>
+        </div>
+      </div>
+      <nav class="menu">
+        <a class="menu__item active" href="#dashboard">Dashboard</a>
+        <a class="menu__item" href="#search">Pesquisar Produto</a>
+        <a class="menu__item" href="#history">Histórico</a>
+        <a class="menu__item" href="#settings">Configurações</a>
+        <a class="menu__item" href="#about">Sobre</a>
+      </nav>
+      <div class="sidebar__footer">
+        <span>Versão 1.0</span>
+        <small>Sistema preparado para API e scraping futuro.</small>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Dashboard</p>
+          <h2>Pricing Intelligence</h2>
+          <p class="subtitle">Monitoramento inteligente de preços para marketplaces.</p>
+        </div>
+        <div class="topbar__actions">
+          <button class="button button--ghost" id="clearAllBtn">Limpar</button>
+          <button class="button button--primary" id="searchBtn">Pesquisar</button>
+        </div>
+      </header>
+
+      <section class="filter-panel" id="search">
+        <div class="filter-panel__item">
+          <label for="marketplaceSelect">Marketplace</label>
+          <select id="marketplaceSelect">
+            <option value="all">Todos</option>
+            <option value="Google Shopping">Google Shopping</option>
+            <option value="Mercado Livre">Mercado Livre</option>
+            <option value="Magazine Luiza">Magazine Luiza</option>
+            <option value="Shopee">Shopee</option>
+            <option value="Amazon">Amazon</option>
+          </select>
+        </div>
+        <div class="filter-panel__item filter-panel__item--wide">
+          <label for="productSearch">Produto</label>
+          <input id="productSearch" placeholder="Ex: Martelete Makita HR2670 800W" />
+        </div>
+        <div class="filter-panel__item">
+          <label for="myPriceInput">Meu Preço</label>
+          <input id="myPriceInput" type="number" placeholder="899,90" min="0" step="0.01" />
+        </div>
+        <div class="filter-panel__actions">
+          <button class="button button--secondary" id="resetBtn">Limpar</button>
+          <button class="button button--primary" id="submitBtn">Pesquisar</button>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Estatísticas principais">
+        <article class="stat-card">
+          <span>Menor preço</span>
+          <strong id="statMinPrice">R$ 0,00</strong>
+        </article>
+        <article class="stat-card">
+          <span>Maior preço</span>
+          <strong id="statMaxPrice">R$ 0,00</strong>
+        </article>
+        <article class="stat-card">
+          <span>Preço médio</span>
+          <strong id="statAvgPrice">R$ 0,00</strong>
+        </article>
+        <article class="stat-card">
+          <span>Preço mediano</span>
+          <strong id="statMedianPrice">R$ 0,00</strong>
+        </article>
+        <article class="stat-card">
+          <span>Quantidade encontrada</span>
+          <strong id="statCount">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Meu posicionamento</span>
+          <strong id="statPosition">—</strong>
+        </article>
+        <article class="stat-card">
+          <span>Competitividade</span>
+          <strong id="statCompetitiveness">—</strong>
+        </article>
+        <article class="stat-card">
+          <span>Diferença média</span>
+          <strong id="statDiffAvg">R$ 0,00</strong>
+        </article>
+      </section>
+
+      <section class="cards-section" id="best-results">
+        <div class="section-header">
+          <h3>Top 20 Produtos do Google Shopping</h3>
+          <p>Resultados com média de mercado, avaliações e comparação com o seu preço.</p>
+        </div>
+        <div class="cards-grid" id="productCards"></div>
+      </section>
+
+      <section class="table-section" id="table-results">
+        <div class="section-header">
+          <h3>Mais resultados</h3>
+          <div class="table-search">
+            <input id="tableSearch" placeholder="Buscar no resultado" />
+          </div>
+        </div>
+        <div class="table-wrapper skeleton-loading" id="tableContainer">
+          <table>
+            <thead>
+              <tr>
+                <th>Imagem</th>
+                <th>Produto</th>
+                <th>Marketplace</th>
+                <th>Loja</th>
+                <th>Preço</th>
+                <th>Preço Antigo</th>
+                <th>Promoção</th>
+                <th>Frete</th>
+                <th>Entrega</th>
+                <th>Competitividade</th>
+                <th>Dif. R$</th>
+                <th>Dif. %</th>
+                <th>Abrir</th>
+              </tr>
+            </thead>
+            <tbody id="resultTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="charts-section" id="charts">
+        <div class="section-header">
+          <h3>Visão Geral</h3>
+        </div>
+        <div class="charts-grid">
+          <article class="chart-card">
+            <h4>Preço por Marketplace</h4>
+            <canvas id="barChart"></canvas>
+          </article>
+          <article class="chart-card">
+            <h4>Participação dos Marketplaces</h4>
+            <canvas id="pieChart"></canvas>
+          </article>
+          <article class="chart-card">
+            <h4>Distribuição de Preços</h4>
+            <canvas id="lineChart"></canvas>
+          </article>
+          <article class="chart-card">
+            <h4>Competitividade</h4>
+            <canvas id="radarChart"></canvas>
+          </article>
+        </div>
+      </section>
+
+      <footer class="app-footer">
+        <p>Dashboard de Inteligência de Preços — preparado para integração futura com APIs e Google Shopping.</p>
+      </footer>
+    </main>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <template id="cardTemplate">
+    <article class="product-card">
+      <div class="product-card__media">
+        <img src="" alt="Imagem do produto" />
+        <span class="badge badge--highlight"></span>
+      </div>
+      <div class="product-card__body">
+        <div class="product-card__info">
+          <p class="product-card__marketplace"></p>
+          <h4 class="product-card__title"></h4>
+          <span class="store-name"></span>
+        </div>
+        <div class="product-card__pricing">
+          <strong class="current-price"></strong>
+          <span class="old-price"></span>
+          <div class="price-tags"></div>
+        </div>
+      </div>
+      <div class="product-card__footer">
+        <div class="product-card__meta">
+          <span class="rating"></span>
+          <span class="reviews-count"></span>
+          <span class="shipping"></span>
+        </div>
+        <a class="button button--ghost button--small" target="_blank" rel="noreferrer">Abrir no Shopping</a>
+      </div>
+      <div class="product-card__summary">
+        <span class="comparison-info"></span>
+        <span class="market-average"></span>
+      </div>
+    </article>
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

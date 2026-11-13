@@ -1,0 +1,72 @@
+:root {
+  --bg: #08101a;
+  --surface: #0f1c28;
+  --surface-strong: #142635;
+  --surface-muted: #192939;
+  --text: #e8f1f8;
+  --text-muted: #98a7b4;
+  --text-secondary: #c1cfdc;
+  --border: rgba(255, 255, 255, 0.08);
+  --primary: #49b7ff;
+  --success: #23d18f;
+  --warning: #f4c150;
+  --danger: #ff6b6b;
+  --info: #7c92ff;
+  --green: #5fd8a6;
+  --yellow: #f2c94c;
+  --orange: #ff9e5b;
+  --red: #ff5a7f;
+  --radius: 1.25rem;
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  --transition: 0.25s ease;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background: radial-gradient(circle at top left, rgba(73, 183, 255, 0.12), transparent 28%),
+    linear-gradient(180deg, #0b121b 0%, #061019 100%);
+  font-family: var(--font-family);
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+input,
+select {
+  outline: none;
+}
+
+button,
+input,
+select,
+textarea {
+  transition: all var(--transition);
+}
+
+.hidden {
+  display: none !important;
+}

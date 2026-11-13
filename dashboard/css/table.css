@@ -1,0 +1,53 @@
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+td img {
+  width: 60px;
+  height: 60px;
+  border-radius: 1rem;
+  object-fit: cover;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.status-badge--very-good {
+  color: var(--green);
+  background: rgba(35, 209, 143, 0.12);
+}
+
+.status-badge--good {
+  color: var(--yellow);
+  background: rgba(242, 193, 74, 0.12);
+}
+
+.status-badge--medium {
+  color: var(--orange);
+  background: rgba(255, 158, 91, 0.14);
+}
+
+.status-badge--bad {
+  color: var(--red);
+  background: rgba(255, 90, 127, 0.12);
+}
+
+table button {
+  padding: 0.65rem 0.9rem;
+  border-radius: 0.9rem;
+  background: rgba(73, 183, 255, 0.12);
+  color: var(--primary);
+}
+
+@media (max-width: 980px) {
+  thead th:last-child,
+  tbody td:last-child {
+    display: none;
+  }
+}

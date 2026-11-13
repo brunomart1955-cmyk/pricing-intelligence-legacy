@@ -1,0 +1,56 @@
+.brand {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.brand__logo {
+  width: 3.25rem;
+  height: 3.25rem;
+  display: grid;
+  place-items: center;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(73, 183, 255, 0.15), rgba(70, 229, 176, 0.14));
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.brand p {
+  margin: 0.25rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.menu {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.menu__item {
+  display: block;
+  padding: 1rem 1.1rem;
+  color: var(--text-secondary);
+  border-radius: 1rem;
+  text-decoration: none;
+  transition: background var(--transition), color var(--transition);
+}
+
+.menu__item:hover,
+.menu__item.active {
+  background: rgba(73, 183, 255, 0.12);
+  color: var(--text);
+}
+
+.sidebar__footer {
+  margin-top: auto;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}

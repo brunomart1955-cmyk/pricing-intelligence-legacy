@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "Pricing Intelligence Extension",
+  "version": "1.0.0",
+
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "scripting"
+  ],
+
+  "host_permissions": [
+    "https://www.google.com/*"
+  ],
+
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/search*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "config.js",
+        "googleParser.js",
+        "utils.js"
+      ],
+      "matches": [
+        "https://www.google.com/*"
+      ]
+    }
+  ],
+
+  "action": {
+    "default_title": "Pricing Intelligence"
+  }
+}
